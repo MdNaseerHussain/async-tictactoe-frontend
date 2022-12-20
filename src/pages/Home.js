@@ -6,8 +6,8 @@ function Home() {
   const navigate = useNavigate();
   return (
     <div>
-      <p>async</p>
-      <p>tic tac toe</p>
+      <p className="app-name app-name-small">async</p>
+      <p className="app-name">tic tac <br/>toe</p>
       <div className="btn-wrapper">
         <Button onClick={() => navigate("/login")} text="Login" styling="btn" />
         <Button

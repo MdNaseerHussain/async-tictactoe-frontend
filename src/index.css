@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bilbo&family=Epilogue:wght@400;700&display=swap');
 
 body, html {
   margin: 0;
@@ -18,11 +18,44 @@ body, html {
   font-size: 28px;
   line-height: 32px;
   color: #333333;
-  margin: 9px 7.5% 40px 7.5%;
+  margin: 9px 5% 30px 5%;
 }
 
 .title-small {
   font-size: 14px;
   line-height: 14px;
-  margin: 37px 7.5% 9px 7.5%;
+  margin: 30px 5% 9px 5%;
+}
+
+.back-arrow {
+  margin-left: 6%;
+  margin-top: 15px;
+}
+
+.app-name {
+  font-family: 'Bilbo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 120px;
+  text-align: center;
+  color: #000000;
+  margin-top: 0;
+}
+
+.app-name-small {
+  font-size: 36px;
+  line-height: 45px;
+  margin-top: 40%;
+}
+
+.game-title {
+  font-family: 'Bilbo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 80px;
+  text-align: center;
+  color: #000000;
+  margin-top: 50%;
 }

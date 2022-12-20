@@ -1,0 +1,23 @@
+.alert {
+  display: block;
+  padding: 30px 5%;
+  width: 80%;
+  border-radius: 2.5%;
+  margin: 24px 5% 16px 5%;
+  border: #ffffff;
+
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ffffff;
+}
+
+.alert-success {
+    background: #6FCF97;
+}
+
+.alert-error {
+    background: #EB5757;
+}

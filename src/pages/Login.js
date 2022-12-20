@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SERVER_ROUTE } from "../utils";
 import "../index.css";
+import BackArrow from "../arrow_back_ios.svg";
 
 function Login() {
   const navigate = useNavigate();
@@ -41,6 +42,12 @@ function Login() {
 
   return (
     <div>
+      <img
+        src={BackArrow}
+        alt="Back"
+        className="back-arrow"
+        onClick={() => navigate("/")}
+      />
       <p className="title title-small">Login</p>
       <p className="title">Please enter your details</p>
       <Input
@@ -60,9 +67,9 @@ function Login() {
         onChange={handleChange}
       />
       <div className="btn-wrapper">
+        {loginFailureMessage && <Alert message={loginFailureMessage} type="error" />}
         <Button text="Login" onClick={handleSubmit} styling="btn" />
       </div>
-      {loginFailureMessage && <Alert message={loginFailureMessage} />}
     </div>
   );
 }

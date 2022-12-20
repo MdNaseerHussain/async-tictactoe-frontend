@@ -1,6 +1,8 @@
-function Alert({ message }) {
+import "./Alert.css";
+
+function Alert({ message, type }) {
   return (
-    <div>Alert {message}</div>
+    <div className={`alert alert-${type}`}>{message}</div>
   )
 }
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_ROUTE } from "../utils";
 import "../index.css";
+import BackArrow from "../arrow_back_ios.svg";
 
 function Register() {
   const navigate = useNavigate();
@@ -43,6 +44,12 @@ function Register() {
 
   return (
     <div>
+      <img
+        src={BackArrow}
+        alt="Back"
+        className="back-arrow"
+        onClick={() => navigate("/")}
+      />
       <p className="title title-small">Create Account</p>
       <p className="title">Let's get to know you better!</p>
       <Input
@@ -78,9 +85,9 @@ function Register() {
         onChange={handleChange}
       />
       <div className="btn-wrapper">
+        {failureMessage && <Alert message={failureMessage} />}
         <Button text="Create Account" onClick={handleSubmit} styling="btn" />
       </div>
-      {failureMessage && <Alert message={failureMessage} />}
     </div>
   );
 }
