@@ -1,0 +1,26 @@
+.input {
+  width: 280px;
+  height: 16px;
+  margin: 12px 24px 16px 24px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  border: #f4f4f4;
+  padding: 22px 16px 18px 16px;
+
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.label {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  color: #333333;
+
+  margin: 0 0 12px 24px;
+}

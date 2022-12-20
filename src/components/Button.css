@@ -1,0 +1,22 @@
+.btn {
+  display: block;
+  background: #f2c94c;
+  height: 56px;
+  width: 328px;
+  border-radius: 8px;
+  margin: 24px 16px 16px 16px;
+  border: #ffffff;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.16);
+
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: #2f80ed;
+}

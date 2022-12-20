@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import Alert from "../components/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SERVER_ROUTE } from "../utils";
 
 function Register() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/register", formValues)
+      .post(`${SERVER_ROUTE}/register`, formValues)
       .then((res) => {
         if (res.data && res.data.accessToken) {
           localStorage.setItem("token", res.data.token);
@@ -47,7 +48,7 @@ function Register() {
       <br />
       <Input
         name="name"
-        placeholder="Enter Name"
+        placeholder="Type your name here"
         type="text"
         value={formValues.name}
         onChange={handleChange}
@@ -55,7 +56,7 @@ function Register() {
       <br />
       <Input
         name="email"
-        placeholder="Enter Email"
+        placeholder="Type your email here"
         type="email"
         value={formValues.email}
         onChange={handleChange}
@@ -63,7 +64,7 @@ function Register() {
       <br />
       <Input
         name="username"
-        placeholder="Enter Username"
+        placeholder="Type your username here"
         type="text"
         value={formValues.username}
         onChange={handleChange}
@@ -71,17 +72,17 @@ function Register() {
       <br />
       <Input
         name="password"
-        placeholder="Enter Password"
+        placeholder="Type your password here"
         type="password"
         value={formValues.password}
         onChange={handleChange}
       />
       <br />
-      <Button text="Create Account" onClick={handleSubmit} />
+      <div style={{ position: "fixed", bottom: 0 }}>
+        <Button text="Create Account" onClick={handleSubmit} styling="btn" />
+      </div>
       <br />
-      {failureMessage && (
-        <Alert message={failureMessage} />
-      )}
+      {failureMessage && <Alert message={failureMessage} />}
     </div>
   );
 }
