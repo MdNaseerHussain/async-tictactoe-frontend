@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap');
 
-body {
+body, html {
   margin: 0;
+}
+
+.btn-wrapper {
+    position: "fixed";
+    bottom: 0;
+    width: 100%;
+    left: 0px;
+}
+
+.title {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+  color: #333333;
+  margin: 9px 7.5% 40px 7.5%;
+}
+
+.title-small {
+  font-size: 14px;
+  line-height: 14px;
+  margin: 37px 7.5% 9px 7.5%;
 }

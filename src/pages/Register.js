@@ -5,6 +5,7 @@ import Alert from "../components/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_ROUTE } from "../utils";
+import "../index.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -42,46 +43,43 @@ function Register() {
 
   return (
     <div>
-      Create Account
-      <br />
-      Let's get to know you better
-      <br />
+      <p className="title title-small">Create Account</p>
+      <p className="title">Let's get to know you better!</p>
       <Input
         name="name"
         placeholder="Type your name here"
         type="text"
+        label="Your Name"
         value={formValues.name}
         onChange={handleChange}
       />
-      <br />
-      <Input
-        name="email"
-        placeholder="Type your email here"
-        type="email"
-        value={formValues.email}
-        onChange={handleChange}
-      />
-      <br />
       <Input
         name="username"
         placeholder="Type your username here"
         type="text"
+        label="Username"
         value={formValues.username}
         onChange={handleChange}
       />
-      <br />
+      <Input
+        name="email"
+        placeholder="Type your email here"
+        type="email"
+        label="Email"
+        value={formValues.email}
+        onChange={handleChange}
+      />
       <Input
         name="password"
         placeholder="Type your password here"
         type="password"
+        label="Password"
         value={formValues.password}
         onChange={handleChange}
       />
-      <br />
-      <div style={{ position: "fixed", bottom: 0 }}>
+      <div className="btn-wrapper">
         <Button text="Create Account" onClick={handleSubmit} styling="btn" />
       </div>
-      <br />
       {failureMessage && <Alert message={failureMessage} />}
     </div>
   );

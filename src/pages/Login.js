@@ -5,6 +5,7 @@ import Alert from "../components/Alert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SERVER_ROUTE } from "../utils";
+import "../index.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -40,10 +41,8 @@ function Login() {
 
   return (
     <div>
-      Login
-      <br />
-      Please enter your details
-      <br />
+      <p className="title title-small">Login</p>
+      <p className="title">Please enter your details</p>
       <Input
         name="username"
         placeholder="Type your username here"
@@ -52,7 +51,6 @@ function Login() {
         value={formValues.username}
         onChange={handleChange}
       />
-      <br />
       <Input
         name="password"
         placeholder="Type your password here"
@@ -61,11 +59,9 @@ function Login() {
         value={formValues.password}
         onChange={handleChange}
       />
-      <br />
-      <div style={{ position: "fixed", bottom: 0 }}>
+      <div className="btn-wrapper">
         <Button text="Login" onClick={handleSubmit} styling="btn" />
       </div>
-      <br />
       {loginFailureMessage && <Alert message={loginFailureMessage} />}
     </div>
   );

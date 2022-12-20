@@ -1,5 +1,6 @@
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import "../index.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function Home() {
     <div>
       <p>async</p>
       <p>tic tac toe</p>
-      <div style={{ position: "fixed", bottom: 0 }}>
+      <div className="btn-wrapper">
         <Button onClick={() => navigate("/login")} text="Login" styling="btn" />
         <Button
           onClick={() => navigate("/register")}

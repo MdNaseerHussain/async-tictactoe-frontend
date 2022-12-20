@@ -1,11 +1,11 @@
 .input {
-  width: 280px;
+  width: 75%;
   height: 16px;
-  margin: 12px 24px 16px 24px;
+  margin: 12px 7.5% 16px 7.5%;
   background: #f4f4f4;
-  border-radius: 8px;
+  border-radius: 2.5%;
   border: #f4f4f4;
-  padding: 22px 16px 18px 16px;
+  padding: 22px 5% 18px 5%;
 
   font-family: "Epilogue";
   font-style: normal;
@@ -22,5 +22,11 @@
   line-height: 14px;
   color: #333333;
 
-  margin: 0 0 12px 24px;
+  margin: 0 0 12px 7.5%;
+}
+
+.btn-wrapper {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
 }
