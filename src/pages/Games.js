@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import GameCard from "../components/GameCard";
 import Button from "../components/Button";
 import "../index.css";
+import AddIcon from "../add.svg";
 
 function Games() {
-  const games = [];
+  const games = [1, 1, 1, 1];
   const navigate = useNavigate();
 
   return games.length > 0 ? (
@@ -13,6 +14,12 @@ function Games() {
       {games.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}
+      <Button
+        text="New Game"
+        styling="btn-icon"
+        image={AddIcon}
+        onClick={() => navigate("/newgame")}
+      />
     </div>
   ) : (
     <div>
@@ -22,7 +29,11 @@ function Games() {
         <br />
         Found
       </p>
-      <Button text="Start a new game" styling="btn" onClick={() => navigate('/newgame')} />
+      <Button
+        text="Start a new game"
+        styling="btn"
+        onClick={() => navigate("/newgame")}
+      />
     </div>
   );
 }

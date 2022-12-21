@@ -20,3 +20,33 @@
 .btn-secondary {
   background: #2f80ed;
 }
+
+.btn-game {
+  height: 50px;
+  border-radius: 8px;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  background: #270f36;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  color: #ffffff;
+  width: 135px;
+  height: 45px;
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+img {
+  width: 24px !important;
+  height: 24px;
+  margin: 5px;
+}

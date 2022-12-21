@@ -1,0 +1,41 @@
+.card {
+  display: block;
+  background: #ffffff;
+  height: 200px;
+  width: 90%;
+  margin: 16px 5%;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding-bottom: 16px;
+}
+
+.card-title {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 25px;
+  color: #333333;
+  padding: 16px 5%;
+  margin-bottom: 0;
+}
+
+.card-status {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #333333;
+  margin: 0 5%;
+}
+
+.card-time {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #3f3f3f;
+  margin: 16px 5%;
+}
