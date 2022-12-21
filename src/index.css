@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Bilbo&family=Epilogue:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bilbo&family=Epilogue:wght@400;700&family=Work+Sans&display=swap");
 
-body, html {
+body,
+html {
   margin: 0;
 }
 
 .btn-wrapper {
-    position: "fixed";
-    bottom: 0;
-    width: 100%;
-    left: 0px;
+  position: "fixed";
+  bottom: 0;
+  width: 100%;
+  left: 0px;
 }
 
 .title {
-  font-family: 'Epilogue';
+  font-family: "Epilogue";
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
@@ -27,13 +28,19 @@ body, html {
   margin: 30px 5% 9px 5%;
 }
 
+.title-game {
+  margin: 30px 5% 9px 5%;
+}
+
 .back-arrow {
   margin-left: 6%;
   margin-top: 15px;
+  height: 24px;
+  width: 24px;
 }
 
 .app-name {
-  font-family: 'Bilbo';
+  font-family: "Bilbo";
   font-style: normal;
   font-weight: 400;
   font-size: 96px;
@@ -50,7 +57,7 @@ body, html {
 }
 
 .game-title {
-  font-family: 'Bilbo';
+  font-family: "Bilbo";
   font-style: normal;
   font-weight: 400;
   font-size: 64px;
@@ -58,4 +65,37 @@ body, html {
   text-align: center;
   color: #000000;
   margin-top: 50%;
+}
+
+.board-label {
+  display: block;
+  background: #ffe79e;
+  width: 90%;
+  padding: 15px 0;
+  margin: 24px 5% 0 5%;
+  border: #ffffff;
+
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 22px;
+  text-align: center;
+  color: #212121;
+}
+
+.piece {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #333333;
+  margin: 8px 5% 8px 5%;
+}
+
+.piece-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 5%;
 }

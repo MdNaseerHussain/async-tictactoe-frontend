@@ -6,13 +6,13 @@ table {
 
 td {
   width: 33.333%;
-  border: 6px solid #FFE79E;;
+  border: 6px solid #FFE79E;
+  text-align: center;
 }
 
 td::after {
   content: "";
   display: block;
-  margin-top: 100%;
 }
 
 td:first-of-type {
@@ -31,4 +31,8 @@ td:nth-of-type(3) {
 
 tr:nth-of-type(3) td {
   border-bottom-color: transparent;
+}
+
+img {
+  width: 100%;
 }
