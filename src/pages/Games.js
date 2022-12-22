@@ -6,18 +6,18 @@ import AddIcon from "../add.svg";
 import io from "socket.io-client";
 import { SERVER_ROUTE } from "../utils";
 
-const token = localStorage.getItem("token");
-const socket = io.connect(SERVER_ROUTE, {
-  auth: { token },
-});
-
 function Games() {
   const games = [1, 1, 1, 1];
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const socket = io.connect(SERVER_ROUTE, {
+    auth: { token },
+  });
 
   socket.on("connect", () => {
     console.log("Connected to server on games page");
   });
+  socket.emit("games page");
 
   return games.length > 0 ? (
     <div>
@@ -29,7 +29,10 @@ function Games() {
         text="New Game"
         styling="btn-icon"
         image={AddIcon}
-        onClick={() => navigate("/newgame")}
+        onClick={() => {
+          socket.disconnect();
+          navigate("/newgame");
+        }}
       />
     </div>
   ) : (
@@ -43,7 +46,10 @@ function Games() {
       <Button
         text="Start a new game"
         styling="btn"
-        onClick={() => navigate("/newgame")}
+        onClick={() => {
+          socket.disconnect();
+          navigate("/newgame");
+        }}
       />
     </div>
   );

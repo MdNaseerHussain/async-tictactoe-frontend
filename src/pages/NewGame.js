@@ -5,6 +5,8 @@ import Input from "../components/Input";
 import Alert from "../components/Alert";
 import "../index.css";
 import BackArrow from "../arrow_back_ios.svg";
+import io from "socket.io-client";
+import { SERVER_ROUTE } from "../utils";
 
 function NewGame() {
   const navigate = useNavigate();
@@ -12,6 +14,15 @@ function NewGame() {
     email: "",
   });
   const [failureMessage, setFailureMessage] = useState(null);
+  const token = localStorage.getItem("token");
+  const socket = io.connect(SERVER_ROUTE, {
+    auth: { token },
+  });
+
+  socket.on("connect", () => {
+    console.log("Connected to server on games page");
+  });
+  socket.emit("new game page");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,8 +32,8 @@ function NewGame() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
-    if(formValues.email === "") {
-        setFailureMessage("Please enter a valid email");
+    if (formValues.email === "") {
+      setFailureMessage("Please enter a valid email");
     }
   };
 
@@ -32,7 +43,10 @@ function NewGame() {
         src={BackArrow}
         alt="Back"
         className="back-arrow"
-        onClick={() => navigate("/games")}
+        onClick={() => {
+          socket.disconnect();
+          navigate("/games");
+        }}
       />
       <p className="title title-small">Start a new game</p>
       <p className="title">Whom do you want to play with?</p>
