@@ -3,7 +3,7 @@ import "./Button.css";
 function Button({ onClick, text, styling, image }) {
   return image ? (
     <button className={styling} onClick={onClick}>
-      <img src={image} alt="button" />
+      <img src={image} alt="button" className="image-btn" />
       {text}
     </button>
   ) : (

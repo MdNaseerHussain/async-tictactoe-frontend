@@ -29,7 +29,7 @@ function Login() {
       .post(`${SERVER_ROUTE}/login`, formValues)
       .then((res) => {
         if (res.data && res.data.accessToken) {
-          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("token", res.data.accessToken);
           navigate("/games");
         } else {
           setLoginFailureMessage("Login Failed");
@@ -67,7 +67,9 @@ function Login() {
         onChange={handleChange}
       />
       <div className="btn-wrapper">
-        {loginFailureMessage && <Alert message={loginFailureMessage} type="error" />}
+        {loginFailureMessage && (
+          <Alert message={loginFailureMessage} type="error" />
+        )}
         <Button text="Login" onClick={handleSubmit} styling="btn" />
       </div>
     </div>
