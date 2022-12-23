@@ -6,14 +6,10 @@ function GameCard({ game }) {
   const { id, turn, player1, player2, date } = game;
   const user = localStorage.getItem("username");
   const opponent = user === player1 ? player2 : player1;
-  const opponentTitleCase = opponent
-    .split(" ")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
   const status =
     turn === user
-      ? `${opponentTitleCase} just made their move! It’s your turn to play now.`
-      : `You've made your move! Waiting for ${opponentTitleCase}.`;
+      ? `${opponent} just made their move! It’s your turn to play now.`
+      : `You've made your move! Waiting for ${opponent}.`;
   const navigate = useNavigate();
 
   const getDaySuffix = (day) => {
@@ -47,7 +43,7 @@ function GameCard({ game }) {
 
   return (
     <div className="card">
-      <p className="card-title">{`Game with ${opponentTitleCase}`}</p>
+      <p className="card-title">{`Game with ${opponent}`}</p>
       <p className="card-status">{`${status.split("!")[0]}!`}</p>
       <p className="card-status">{status.split("!")[1]}</p>
       <p className="card-time">{formatDate(date)}</p>
