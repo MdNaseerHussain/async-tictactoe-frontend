@@ -30,6 +30,7 @@ function Login() {
       .then((res) => {
         if (res.data && res.data.accessToken) {
           localStorage.setItem("token", res.data.accessToken);
+          localStorage.setItem("username", formValues.username);
           navigate("/games");
         } else {
           setLoginFailureMessage("Login Failed");

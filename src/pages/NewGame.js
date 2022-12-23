@@ -20,9 +20,8 @@ function NewGame() {
   });
 
   socket.on("connect", () => {
-    console.log("Connected to server on games page");
+    console.log("Connected to server on new game page");
   });
-  socket.emit("new game page");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,10 +30,20 @@ function NewGame() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
     if (formValues.email === "") {
       setFailureMessage("Please enter a valid email");
     }
+    socket.emit("new game", formValues.email, (response) => {
+      if (response.message) {
+        setFailureMessage(response.message);
+      } else {
+        const { gameId, player1, email } = response;
+        const username = localStorage.getItem("username");
+        if (player1 === username && email === formValues.email) {
+          navigate(`/play/${gameId}`);
+        }
+      }
+    });
   };
 
   return (

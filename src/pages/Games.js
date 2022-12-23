@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameCard from "../components/GameCard";
 import Button from "../components/Button";
@@ -5,19 +6,42 @@ import "../index.css";
 import AddIcon from "../add.svg";
 import io from "socket.io-client";
 import { SERVER_ROUTE } from "../utils";
+import axios from "axios";
 
 function Games() {
-  const games = [1, 1, 1, 1];
+  const [games, setGames] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const socket = io.connect(SERVER_ROUTE, {
-    auth: { token },
-  });
 
-  socket.on("connect", () => {
-    console.log("Connected to server on games page");
-  });
-  socket.emit("games page");
+  const getGames = () => {
+    axios
+      .get(`${SERVER_ROUTE}/games`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setGames(res.data.games);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    const socket = io.connect(SERVER_ROUTE, {
+      auth: { token },
+    });
+    socket.on("connect", () => {
+      getGames();
+    });
+    socket.on("game update", () => {
+      getGames();
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, [token]);
 
   return games.length > 0 ? (
     <div>
@@ -29,10 +53,7 @@ function Games() {
         text="New Game"
         styling="btn-icon"
         image={AddIcon}
-        onClick={() => {
-          socket.disconnect();
-          navigate("/newgame");
-        }}
+        onClick={() => navigate("/newgame")}
       />
     </div>
   ) : (
@@ -46,10 +67,7 @@ function Games() {
       <Button
         text="Start a new game"
         styling="btn"
-        onClick={() => {
-          socket.disconnect();
-          navigate("/newgame");
-        }}
+        onClick={() => navigate("/newgame")}
       />
     </div>
   );

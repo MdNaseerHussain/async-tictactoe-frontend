@@ -32,6 +32,7 @@ function Register() {
       .then((res) => {
         if (res.data && res.data.accessToken) {
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("username", formValues.username);
           navigate("/games");
         } else {
           setMessage("Account Creation Failed");

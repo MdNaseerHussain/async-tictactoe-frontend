@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Board from "../components/Board";
 import Button from "../components/Button";
 import "../index.css";
@@ -10,14 +11,23 @@ import { SERVER_ROUTE } from "../utils";
 function Play() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const socket = io.connect(SERVER_ROUTE, {
-    auth: { token },
-  });
+  const { id: gameId } = useParams();
+  const [turn, setTurn] = useState(false);
+  const [board, setBoard] = useState([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ]);
+  const [winner, setWinner] = useState(null);
 
-  socket.on("connect", () => {
-    console.log("Connected to server on games page");
-  });
-  socket.emit("play page");
+  useEffect(() => {
+    const socket = io.connect(SERVER_ROUTE, {
+      auth: { token },
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, [token]);
 
   return (
     <div>
@@ -25,10 +35,7 @@ function Play() {
         src={BackArrow}
         alt="Back"
         className="back-arrow"
-        onClick={() => {
-          socket.disconnect();
-          navigate("/games");
-        }}
+        onClick={() => navigate("/games")}
       />
       <p className="title title-game">Game with Naseer</p>
       <p className="piece">Your Piece</p>
