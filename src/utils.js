@@ -1,1 +1,1 @@
-export const SERVER_ROUTE = "http://localhost:3001";
+export const SERVER_ROUTE = "https://async-games-backend.onrender.com";
