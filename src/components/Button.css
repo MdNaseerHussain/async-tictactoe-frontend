@@ -17,6 +17,10 @@
   color: #ffffff;
 }
 
+.btn-disabled {
+  background: rgb(188, 186, 186);
+}
+
 .btn-secondary {
   background: #2f80ed;
 }

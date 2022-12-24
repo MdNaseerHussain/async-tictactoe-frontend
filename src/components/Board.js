@@ -3,62 +3,33 @@ import BlankLogo from "../BlankLogo.svg";
 import Ologo from "../Ologo.svg";
 import Xlogo from "../Xlogo.svg";
 
-function Board({ board }) {
+function Board({ board, handleClick, user, opponent }) {
   return (
     <table id="board">
       <tbody>
         <tr>
-          <td>
-            {board[0][0] === "X" ? (
+          <td onClick={() => handleClick(0, 0)}>
+            {board[0][0] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[0][0] === "O" ? (
+            ) : board[0][0] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />
             )}
           </td>
-          <td>
-            {board[0][1] === "X" ? (
+          <td onClick={() => handleClick(0, 1)}>
+            {board[0][1] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[0][1] === "O" ? (
+            ) : board[0][1] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />
             )}
           </td>
-          <td>
-            {board[0][2] === "X" ? (
+          <td onClick={() => handleClick(0, 2)}>
+            {board[0][2] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[0][2] === "O" ? (
-              <img src={Ologo} alt="O" />
-            ) : (
-              <img src={BlankLogo} alt="" />
-            )}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {board[1][0] === "X" ? (
-              <img src={Xlogo} alt="X" />
-            ) : board[1][0] === "O" ? (
-              <img src={Ologo} alt="O" />
-            ) : (
-              <img src={BlankLogo} alt="" />
-            )}
-          </td>
-          <td>
-            {board[1][1] === "X" ? (
-              <img src={Xlogo} alt="X" />
-            ) : board[1][1] === "O" ? (
-              <img src={Ologo} alt="O" />
-            ) : (
-              <img src={BlankLogo} alt="" />
-            )}
-          </td>
-          <td>
-            {board[1][2] === "X" ? (
-              <img src={Xlogo} alt="X" />
-            ) : board[1][2] === "O" ? (
+            ) : board[0][2] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />
@@ -66,28 +37,57 @@ function Board({ board }) {
           </td>
         </tr>
         <tr>
-          <td>
-            {board[2][0] === "X" ? (
+          <td onClick={() => handleClick(1, 0)}>
+            {board[1][0] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[2][0] === "O" ? (
+            ) : board[1][0] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />
             )}
           </td>
-          <td>
-            {board[2][1] === "X" ? (
+          <td onClick={() => handleClick(1, 1)}>
+            {board[1][1] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[2][1] === "O" ? (
+            ) : board[1][1] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />
             )}
           </td>
-          <td>
-            {board[2][2] === "X" ? (
+          <td onClick={() => handleClick(1, 2)}>
+            {board[1][2] === user ? (
               <img src={Xlogo} alt="X" />
-            ) : board[2][2] === "O" ? (
+            ) : board[1][2] === opponent ? (
+              <img src={Ologo} alt="O" />
+            ) : (
+              <img src={BlankLogo} alt="" />
+            )}
+          </td>
+        </tr>
+        <tr>
+          <td onClick={() => handleClick(2, 0)}>
+            {board[2][0] === user ? (
+              <img src={Xlogo} alt="X" />
+            ) : board[2][0] === opponent ? (
+              <img src={Ologo} alt="O" />
+            ) : (
+              <img src={BlankLogo} alt="" />
+            )}
+          </td>
+          <td onClick={() => handleClick(2, 1)}>
+            {board[2][1] === user ? (
+              <img src={Xlogo} alt="X" />
+            ) : board[2][1] === opponent ? (
+              <img src={Ologo} alt="O" />
+            ) : (
+              <img src={BlankLogo} alt="" />
+            )}
+          </td>
+          <td onClick={() => handleClick(2, 2)}>
+            {board[2][2] === user ? (
+              <img src={Xlogo} alt="X" />
+            ) : board[2][2] === opponent ? (
               <img src={Ologo} alt="O" />
             ) : (
               <img src={BlankLogo} alt="" />

@@ -24,6 +24,27 @@ function Play() {
     ["", "", ""],
   ]);
   const [winner, setWinner] = useState("");
+  const [played, setPlayed] = useState(false);
+
+  const gameOver = () => {
+    for (let i = 0; i < 3; i++) {
+      if (board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+        if (board[i][0] !== "") return true;
+      }
+    }
+    for (let i = 0; i < 3; i++) {
+      if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+        if (board[0][i] !== "") return true;
+      }
+    }
+    if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+      if (board[0][0] !== "") return true;
+    }
+    if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+      if (board[0][2] !== "") return true;
+    }
+    return false;
+  };
 
   const getGame = () => {
     axios
@@ -34,8 +55,71 @@ function Play() {
       })
       .then((res) => {
         setTurn(res.data.game.turn);
-        setBoard(res.data.game.board);
         setWinner(res.data.game.winner);
+        const newBoard = [];
+        for (let i = 0; i < 3; i++) {
+          newBoard.push([]);
+          for (let j = 0; j < 3; j++) {
+            newBoard[i].push(res.data.game.board[i * 3 + j]);
+          }
+        }
+        setBoard(newBoard);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleClick = (row, col) => {
+    if (turn === user && winner === "") {
+      const newBoard = [...board];
+      if (newBoard[row][col] !== "") {
+        return;
+      }
+      newBoard[row][col] = user;
+      setPlayed(true);
+      setBoard(newBoard);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (winner !== "") {
+      navigate("/newgame");
+      return;
+    }
+    if (!played) return;
+    if (turn !== user) return;
+    setTurn(opponent);
+    if (gameOver()) {
+      setWinner(turn);
+      setTurn("");
+    }
+    axios
+      .put(
+        `${SERVER_ROUTE}/game/${id}`,
+        {
+          board: board.flat(),
+          turn: opponent,
+          winner: winner,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setTurn(res.data.game.turn);
+        setWinner(res.data.game.winner);
+        const newBoard = [];
+        for (let i = 0; i < 3; i++) {
+          newBoard.push([]);
+          for (let j = 0; j < 3; j++) {
+            newBoard[i].push(res.data.game.board[i * 3 + j]);
+          }
+        }
+        setBoard(newBoard);
       })
       .catch((err) => {
         console.log(err);
@@ -75,11 +159,28 @@ function Play() {
             : "Their Move"
           : winner === user
           ? "You Won!"
-          : "You Lost!"}
+          : winner === opponent
+          ? "You Lost!"
+          : "It's a Draw!"}
       </p>
-      <Board board={board} />
+      <Board
+        board={board}
+        handleClick={handleClick}
+        user={user}
+        opponent={opponent}
+      />
       <div className="btn-wrapper">
-        <Button text="Submit" styling="btn" />
+        <Button
+          text={
+            winner === ""
+              ? turn === user
+                ? "Submit"
+                : `Waiting for ${opponent}`
+              : "Start another game"
+          }
+          styling={turn === opponent ? "btn btn-disabled" : "btn"}
+          onClick={handleSubmit}
+        />
       </div>
     </div>
   );
