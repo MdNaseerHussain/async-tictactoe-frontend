@@ -23,17 +23,15 @@ function Games() {
       .then((res) => {
         setGames(res.data.games);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        navigate("/login");
       });
   };
 
   useEffect(() => {
+    getGames();
     const socket = io.connect(SERVER_ROUTE, {
       auth: { token },
-    });
-    socket.on("connect", () => {
-      getGames();
     });
     socket.on("game update", () => {
       getGames();

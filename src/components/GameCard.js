@@ -3,13 +3,19 @@ import Button from "./Button";
 import "./GameCard.css";
 
 function GameCard({ game }) {
-  const { id, turn, player1, player2, date } = game;
+  const { id, turn, player1, player2, date, winner } = game;
   const user = localStorage.getItem("username");
   const opponent = user === player1 ? player2 : player1;
   const status =
-    turn === user
-      ? `${opponent} just made their move! It’s your turn to play now.`
-      : `You've made your move! Waiting for ${opponent}.`;
+    winner === ""
+      ? turn === user
+        ? `${opponent} just made their move! It’s your turn to play now.`
+        : `You've made your move! Waiting for ${opponent}.`
+      : winner === "draw"
+      ? "It's a draw! Game over."
+      : winner === user
+      ? "You won! Game over."
+      : "You lost! Game over.";
   const navigate = useNavigate();
 
   const getDaySuffix = (day) => {

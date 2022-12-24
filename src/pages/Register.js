@@ -31,7 +31,7 @@ function Register() {
       .post(`${SERVER_ROUTE}/register`, formValues)
       .then((res) => {
         if (res.data && res.data.accessToken) {
-          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("token", res.data.accessToken);
           localStorage.setItem("username", formValues.username);
           navigate("/games");
         } else {
@@ -86,7 +86,7 @@ function Register() {
         onChange={handleChange}
       />
       <div className="btn-wrapper">
-        {failureMessage && <Alert message={failureMessage} />}
+        {failureMessage && <Alert message={failureMessage} type="error" />}
         <Button text="Create Account" onClick={handleSubmit} styling="btn" />
       </div>
     </div>
