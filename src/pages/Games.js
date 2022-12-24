@@ -21,7 +21,8 @@ function Games() {
         },
       })
       .then((res) => {
-        setGames(res.data.games);
+        const gamesList = res.data.games;
+        setGames([...gamesList].reverse());
       })
       .catch(() => {
         navigate("/login");
