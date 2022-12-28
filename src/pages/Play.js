@@ -32,9 +32,9 @@ function Play() {
   ]);
 
   const updateGame = ({ board, winner, turn }) => {
-    const newBoard = board.map((row) => [...row]);
-    const newWinner = winner;
-    const newTurn = turn === player1 ? player2 : player1;
+    let newBoard = board.map((row) => [...row]);
+    let newWinner = winner;
+    let newTurn = turn === player1 ? player2 : player1;
     const winningCombinations = [
       [newBoard[0][0], newBoard[0][1], newBoard[0][2]],
       [newBoard[1][0], newBoard[1][1], newBoard[1][2]],
