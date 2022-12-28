@@ -31,6 +31,44 @@ function Play() {
     ["", "", ""],
   ]);
 
+  const updateGame = ({ board, winner, turn }) => {
+    const newBoard = board.map((row) => [...row]);
+    const newWinner = winner;
+    const newTurn = turn === player1 ? player2 : player1;
+    const winningCombinations = [
+      [newBoard[0][0], newBoard[0][1], newBoard[0][2]],
+      [newBoard[1][0], newBoard[1][1], newBoard[1][2]],
+      [newBoard[2][0], newBoard[2][1], newBoard[2][2]],
+      [newBoard[0][0], newBoard[1][0], newBoard[2][0]],
+      [newBoard[0][1], newBoard[1][1], newBoard[2][1]],
+      [newBoard[0][2], newBoard[1][2], newBoard[2][2]],
+      [newBoard[0][0], newBoard[1][1], newBoard[2][2]],
+      [newBoard[0][2], newBoard[1][1], newBoard[2][0]],
+    ];
+    for (let i = 0; i < winningCombinations.length; i++) {
+      const [a, b, c] = winningCombinations[i];
+      if (a === b && b === c && a !== "") {
+        newWinner = a;
+        break;
+      }
+    }
+    if (newWinner !== "") {
+      let draw = true;
+      for (let i = 0; i < newBoard.length; i++) {
+        for (let j = 0; j < newBoard[i].length; j++) {
+          if (newBoard[i][j] === "") {
+            draw = false;
+            break;
+          }
+        }
+      }
+      if (draw) {
+        newWinner = "draw";
+      }
+    }
+    return { newBoard, newWinner, newTurn };
+  };
+
   const getGame = () => {
     axios
       .get(`${SERVER_ROUTE}/game/${id}`, {
@@ -69,6 +107,14 @@ function Play() {
     }
     if (!played) return;
     if (turn !== user) return;
+    const { newBoard, newWinner, newTurn } = updateGame({
+      board,
+      winner,
+      turn,
+    });
+    setBoard(newBoard);
+    setWinner(newWinner);
+    setTurn(newTurn);
     axios
       .put(
         `${SERVER_ROUTE}/game/${id}`,
