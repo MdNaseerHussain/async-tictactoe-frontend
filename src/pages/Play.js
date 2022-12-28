@@ -119,7 +119,7 @@ function Play() {
       .put(
         `${SERVER_ROUTE}/game/${id}`,
         {
-          board: board,
+          board: newBoard,
         },
         {
           headers: {
