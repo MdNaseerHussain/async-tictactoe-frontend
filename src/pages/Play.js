@@ -8,6 +8,7 @@ import Xlogo from "../Xlogo.svg";
 import io from "socket.io-client";
 import { SERVER_ROUTE } from "../utils";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 function Play() {
   const navigate = useNavigate();
@@ -30,44 +31,7 @@ function Play() {
     ["", "", ""],
     ["", "", ""],
   ]);
-
-  const updateGame = ({ board, winner, turn }) => {
-    let newBoard = board.map((row) => [...row]);
-    let newWinner = winner;
-    let newTurn = turn === player1 ? player2 : player1;
-    const winningCombinations = [
-      [newBoard[0][0], newBoard[0][1], newBoard[0][2]],
-      [newBoard[1][0], newBoard[1][1], newBoard[1][2]],
-      [newBoard[2][0], newBoard[2][1], newBoard[2][2]],
-      [newBoard[0][0], newBoard[1][0], newBoard[2][0]],
-      [newBoard[0][1], newBoard[1][1], newBoard[2][1]],
-      [newBoard[0][2], newBoard[1][2], newBoard[2][2]],
-      [newBoard[0][0], newBoard[1][1], newBoard[2][2]],
-      [newBoard[0][2], newBoard[1][1], newBoard[2][0]],
-    ];
-    for (let i = 0; i < winningCombinations.length; i++) {
-      const [a, b, c] = winningCombinations[i];
-      if (a === b && b === c && a !== "") {
-        newWinner = a;
-        break;
-      }
-    }
-    if (newWinner !== "") {
-      let draw = true;
-      for (let i = 0; i < newBoard.length; i++) {
-        for (let j = 0; j < newBoard[i].length; j++) {
-          if (newBoard[i][j] === "") {
-            draw = false;
-            break;
-          }
-        }
-      }
-      if (draw) {
-        newWinner = "draw";
-      }
-    }
-    return { newBoard, newWinner, newTurn };
-  };
+  const [loading, setLoading] = useState(true);
 
   const getGame = () => {
     axios
@@ -81,6 +45,7 @@ function Play() {
         setWinner(res.data.game.winner);
         setBoard(res.data.game.board);
         setOriginalBoard(res.data.game.board);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -101,25 +66,18 @@ function Play() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (winner !== "") {
       navigate("/newgame");
       return;
     }
     if (!played) return;
     if (turn !== user) return;
-    const { newBoard, newWinner, newTurn } = updateGame({
-      board,
-      winner,
-      turn,
-    });
-    setBoard(newBoard);
-    setWinner(newWinner);
-    setTurn(newTurn);
     axios
       .put(
         `${SERVER_ROUTE}/game/${id}`,
         {
-          board: newBoard,
+          board: board,
         },
         {
           headers: {
@@ -131,6 +89,7 @@ function Play() {
         setTurn(res.data.game.turn);
         setWinner(res.data.game.winner);
         setBoard(res.data.game.board);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -145,6 +104,7 @@ function Play() {
       getGame();
     });
     socket.on("game update", (data) => {
+      setLoading(true);
       if (data.id === id) getGame();
     });
     return () => {
@@ -152,7 +112,9 @@ function Play() {
     };
   }, [token, id]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div>
       <img
         src={BackArrow}

@@ -7,11 +7,13 @@ import AddIcon from "../add.svg";
 import io from "socket.io-client";
 import { SERVER_ROUTE } from "../utils";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 function Games() {
   const [games, setGames] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(true);
 
   const getGames = () => {
     axios
@@ -23,6 +25,7 @@ function Games() {
       .then((res) => {
         const gamesList = res.data.games;
         setGames([...gamesList].reverse());
+        setLoading(false);
       })
       .catch(() => {
         navigate("/login");
@@ -42,7 +45,9 @@ function Games() {
     };
   }, [token]);
 
-  return games.length > 0 ? (
+  return loading ? (
+    <Loader />
+  ) : games.length > 0 ? (
     <div>
       <p className="title">Your Games</p>
       {games.map((game) => (
