@@ -7,6 +7,7 @@ import axios from "axios";
 import { SERVER_ROUTE } from "../utils";
 import "../index.css";
 import BackArrow from "../arrow_back_ios.svg";
+import Loader from "../components/Loader";
 
 function Register() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Register() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const [failureMessage, setMessage] = useState(null);
 
@@ -27,6 +29,7 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post(`${SERVER_ROUTE}/register`, formValues)
       .then((res) => {
@@ -36,14 +39,18 @@ function Register() {
           navigate("/games");
         } else {
           setMessage("Account Creation Failed");
+          setLoading(false);
         }
       })
       .catch((err) => {
         setMessage(err.response.data);
+        setLoading(false);
       });
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div>
       <img
         src={BackArrow}

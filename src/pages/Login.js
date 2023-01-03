@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { SERVER_ROUTE } from "../utils";
 import "../index.css";
 import BackArrow from "../arrow_back_ios.svg";
+import Loader from "../components/Loader";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Login() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const [loginFailureMessage, setLoginFailureMessage] = useState(null);
 
@@ -25,6 +27,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post(`${SERVER_ROUTE}/login`, formValues)
       .then((res) => {
@@ -34,14 +37,18 @@ function Login() {
           navigate("/games");
         } else {
           setLoginFailureMessage("Login Failed");
+          setLoading(false);
         }
       })
       .catch((err) => {
         setLoginFailureMessage(err.response.data);
+        setLoading(false);
       });
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div>
       <img
         src={BackArrow}
